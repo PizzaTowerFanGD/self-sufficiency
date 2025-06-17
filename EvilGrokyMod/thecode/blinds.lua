@@ -101,11 +101,99 @@ trolled = SMODS.Blind{
 	return -1
 	end
 	}
-
-_getbossfuncOLD_EVILGROKYMOD = get_new_boss
-function get_new_boss()
-if G.GAME.round_resets.ante >= 38 then
-return jimbo.key
-end
-return _getbossfuncOLD_EVILGROKYMOD()
-end
+	
+	loop1 = SMODS.Blind{
+	key='loop1',
+	loc_txt={name='The Loop', text = {"Debuffs all Common Jokers,","Loop 1/4."}},
+	atlas='egblinds',
+	pos={y=6},
+	boss_colour = HEX("935ADC"),
+	mult=2,
+	boss={min=-math.huge},
+	recalc_debuff=function(self, card, from_blind)
+		if card.area == G.jokers and card.config.center.rarity == 1 and not G.GAME.blind.disabled then
+			return true
+		end
+	end,
+	cry_calc_ante_gain = function(self)
+	G.egm.loopcount = 1
+	return 0
+	end
+	}
+loop2 = SMODS.Blind{
+	key='loop2',
+	loc_txt={name='The Loop', text = {"Debuffs all Uncommon or lower Jokers,","Loop 2/4."}},
+	atlas='egblinds',
+	pos={y=6},
+	boss_colour = HEX("935ADC"),
+	mult=3,
+	boss={min=math.huge},
+	recalc_debuff=function(self, card, from_blind)
+	if type(card.config.center.rarity) ~= type(1) then return false end
+		if card.area == G.jokers and card.config.center.rarity <=2 and not G.GAME.blind.disabled then
+			return true
+		end
+	end,
+	cry_calc_ante_gain = function(self)
+	G.egm.loopcount = 2
+	return 0
+	end
+	}
+	loop3 = SMODS.Blind{
+	key='loop3',
+	loc_txt={name='The Loop', text = {"Debuffs all Polychrome Jokers,","Applies all previous Loops,","Loop 3/4."}},
+	atlas='egblinds',
+	pos={y=6},
+	boss_colour = HEX("935ADC"),
+	mult=5,
+	boss={min=math.huge},
+	recalc_debuff=function(self, card, from_blind)
+	if type(card.config.center.rarity) ~= type(1) then return false end
+		if card.area == G.jokers and ((card.edition and card.edition.type == "polychrome") or card.config.center.rarity <= 2) and not G.GAME.blind.disabled then
+			return true
+		end
+	end,
+	cry_calc_ante_gain = function(self)
+	G.egm.loopcount = 3
+	return 0
+	end
+	}
+	loop4 = SMODS.Blind{
+	key='loop4',
+	loc_txt={name='The Loop', text = {"Debuffs all playing cards,","Applies all previous Loops,","Loop 4/4."}},
+	atlas='egblinds',
+	pos={y=6},
+	boss_colour = HEX("935ADC"),
+	mult=10,
+	boss={min=math.huge},
+	recalc_debuff = function(self, card, from_blind)
+	if G.GAME.blind.disabled then return false end
+	-- debuff jokers if they're polychrome or common/uncommon
+	if card.area == G.jokers then
+		if (card.edition and card.edition.type == "polychrome") or (type(card.config.center.rarity) == "number" and card.config.center.rarity <= 2) then
+			return true
+		end
+	end
+	-- debuff playing cards unconditionally
+	if card.area ~= G.jokers then
+		return true
+	end
+	return false
+end,
+	cry_calc_ante_gain = function(self)
+	G.egm.loopcount = 4
+	return 0
+	end
+	}
+	trolled = SMODS.Blind{
+	key='trolled2',
+	loc_txt={name='Those Who Know', text = {"Set Ante to -Infinity instead of adding Ante."}},
+	atlas='egblinds',
+	pos={y=7},
+	boss_colour = HEX("FFFFFF"),
+	mult=-math.huge,
+	boss={min=-math.huge},
+	cry_calc_ante_gain = function(self)
+	return -math.huge
+	end
+	}
