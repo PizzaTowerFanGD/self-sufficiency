@@ -98,7 +98,7 @@ retard = SMODS.Joker{
 	cost = 0,
 	atlas = 'bitch',
 	calculate = function(self,card,context)
-	if G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+	if G.STATE == G.STATES.HAND_PLAYED then
 	egmGameOver()
 	end
 	end,
