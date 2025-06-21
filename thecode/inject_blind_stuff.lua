@@ -63,6 +63,7 @@ table.insert(runtime_pre_injections, function()
     G.FORCE_SMALL = false
     G.FORCE_BIG = false
     G.FORCE_BOSS = false
+    if G.FORCE_FORCE_BOSS then G.FORCE_BOSS = G.FORCE_FORCE_BOSS end
 end)
 table.insert(runtime_injections, function()
 if G.GAME.modifiers.scaling_set then

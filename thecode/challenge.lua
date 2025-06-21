@@ -250,7 +250,7 @@ SMODS.Challenge{ -- the fakeout
     },
 }
 
-SMODS.Challenge{ -- the fakeout
+SMODS.Challenge{ -- the black jack
     loc_txt = "Blackjack",
     key = 'jackblack',
     rules = {
@@ -269,3 +269,25 @@ SMODS.Challenge{ -- the fakeout
         banned_other = {}
     },
 }
+
+SMODS.Challenge{ -- real scalae
+    loc_txt = "True Scaling",
+    key = 'howitshouldbe',
+    rules = {
+        custom = {
+        	{id="always_endless_scaling"},
+        	{id="negative_ante_scaling"}
+    },
+        modifiers = {
+        	        },
+    },
+    jokers = {},
+    restrictions = {
+        banned_cards = {
+            },
+        banned_tags = {
+        },
+        banned_other = {}
+    },
+}
+

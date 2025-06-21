@@ -190,10 +190,31 @@ end,
 	loc_txt={name='Those Who Know', text = {"Set Ante to -Infinity instead of adding Ante."}},
 	atlas='egblinds',
 	pos={y=7},
-	boss_colour = HEX("FFFFFF"),
+	boss_colour = HEX("000000"),
 	mult=-math.huge,
 	boss={min=-math.huge},
 	cry_calc_ante_gain = function(self)
 	return -math.huge
 	end
 	}
+	squam = SMODS.Blind{
+	key='SQUAM',
+	loc_txt={name='The SQUAM', text = {"Score at least Base^2"}},
+	atlas='egblinds',
+	pos={y=8},
+	boss_colour = HEX("FFFF00"),
+	mult=1,
+	exp=2,
+	boss={min=-math.huge},
+	}
+	monolith = SMODS.Blind{
+	key='monolith',
+	loc_txt={name='Maroon Monolith', text = {"Score at least Base^3."}},
+	atlas='egblinds',
+	pos={y=9},
+	boss_colour = HEX("500000"),
+	mult=1,
+	exp=3,
+	boss={min=-math.huge, showdown=true},
+	}
+	
