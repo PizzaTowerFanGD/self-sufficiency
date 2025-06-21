@@ -6,7 +6,7 @@
 --- MOD_DESCRIPTION: Adds stuff to Balatro.
 --- BADGE_COLOUR: 708b91
 --- DEPENDENCIES: [Steamodded, Cryptid]
---- VERSION: 1.2.0a
+--- VERSION: 1.2.0b
 --- PRIORITY: 2147483647
 G.egm = {}
 local mod_path = SMODS.current_mod.path
